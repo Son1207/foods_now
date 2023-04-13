@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:foods_now/cart/componentss/body.dart';
+import 'package:foods_now/cart/component/body.dart';
 
-class CartPage extends StatelessWidget {
-  static String routeName ="/carts";
+class CheckOutPage extends StatelessWidget {
+  static String routeName ="/check_out";
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class CartPage extends StatelessWidget {
           },
           child:const Icon(Icons.arrow_back_ios),
         ),
-        title:const Text("Cart Details"),
+        title:const Text("Check Out"),
       ),
       body: Body(),
     );

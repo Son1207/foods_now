@@ -31,11 +31,11 @@ class _SignInFormState extends State<SignInForm> {
     fToast =FToast();
     fToast?.init(context);
     _getData();
-  }
+  }  
 
   _getData() async{
     prefs =await SharedPreferences.getInstance();
-    if(!prefs.getString('username').isEmpty){
+    if(!prefs.getString('username')?.isEmpty){
       username.text=prefs.getString('username');
       password.text=prefs.getString('password');
       _value =prefs.getBool('check');
@@ -43,6 +43,8 @@ class _SignInFormState extends State<SignInForm> {
   }
 
   @override
+
+  
   Widget build(BuildContext context) {
     return Form(
       key: _formKey,
@@ -77,19 +79,14 @@ class _SignInFormState extends State<SignInForm> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     TextFormField(
-                      /*
                       validator: (value){
-                        return Utilities.validatePassword(value);
+                        return Utilities.validateEmail(value!);
                       },
                       onSaved: (_value){
                         setState(() {
-                          username.text=_value;
+                          username.text=_value!;
                         });
                       },
-
-                       */
-
-
                       controller: username,
                       decoration:const InputDecoration(
                         border: OutlineInputBorder(),
@@ -100,9 +97,14 @@ class _SignInFormState extends State<SignInForm> {
                     const SizedBox(height: 5,),
                     TextFormField(
                       controller: password,
+                      validator: (value){
+                        return Utilities.validatePassword(value!);
+                      },
+                      keyboardType: TextInputType.number,
+                      obscureText: true,
                       decoration:const InputDecoration(
                         border: OutlineInputBorder(),
-                        hintText: "Username",
+                        hintText: "Password",
                         prefixIcon: Icon(Icons.lock_outline_rounded),
                       ),
                     ),
@@ -187,8 +189,8 @@ class _SignInFormState extends State<SignInForm> {
                         GestureDetector(
                           onTap: () async{
                             final result = await Navigator.pushNamed(context, SignUpPage.routeName);
-                          //  User user = result;
-                            // username.text=user.username;
+                            User? user = result as User?;
+                            username.text=user!.username;
                           },
                           child: const Text("Sign Up",style: TextStyle(
                             color: Colors.redAccent,

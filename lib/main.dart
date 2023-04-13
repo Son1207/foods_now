@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:foods_now/cart/cart_page.dart';
+import 'package:foods_now/cart/checkout_page.dart';
 import 'package:foods_now/homepage/homepage.dart';
 import 'package:foods_now/product/product_page.dart';
 import 'package:foods_now/sign_in/signin_page.dart';
 import 'package:foods_now/sign_up/signup_page.dart';
 import 'package:foods_now/splashpage.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -26,6 +28,7 @@ class MyApp extends StatelessWidget {
         HomePage.routeName:(context) => HomePage(),
         ProductPage.routeName: ((context) => ProductPage()),
         CartPage.routeName: ((context)=>CartPage()),
+        CheckOutPage.routeName: ((context)=>CheckOutPage()),
       },
       home: SplashPage(),
     );

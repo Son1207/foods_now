@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:foods_now/model/user.dart';
 import 'package:foods_now/model/utilities.dart';
 
@@ -22,29 +21,30 @@ class _SignUpFormState extends State<SignUpForm> {
   @override
   Widget build(BuildContext context) {
     return Form(
+      key: _fromKey,
       child: Padding(
         padding:const EdgeInsets.all(10.0),
         child: Column(
           children: [
-            SizedBox(height: 30,),
+            const SizedBox(height: 30,),
             emailTextFormField(),
-            SizedBox(height: 30,),
+            const SizedBox(height: 30,),
             passwordTextFormField(),
-            SizedBox(height: 30,),
+            const SizedBox(height: 30,),
             conformTextFormField(),
-            SizedBox(height: 30,),
+            const SizedBox(height: 30,),
             SizedBox(
               height: 50,
               width: MediaQuery.of(context).size.width,
               child: ElevatedButton(
-                onPressed: () async{
+                onPressed: () {
                   if(
                   _fromKey.currentState!.validate()){
                   Navigator.pop(context, User(username: email.text,password: conform.text));
                   }
                 },
                 style:ButtonStyle(foregroundColor: MaterialStateProperty.all<Color>(Colors.green)),
-                child:Text("Continue",style: TextStyle(
+                child:const Text("Continue",style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
@@ -52,7 +52,7 @@ class _SignUpFormState extends State<SignUpForm> {
               ),
             ),
 
-            SizedBox(height: 30,),
+            const SizedBox(height: 30,),
             Container(
               width: MediaQuery.of(context).size.width,
               child: Row(
@@ -106,16 +106,14 @@ class _SignUpFormState extends State<SignUpForm> {
         floatingLabelBehavior: FloatingLabelBehavior.always,
         suffixIcon: Icon(Icons.email_outlined)
       ),
-      /*
-      validator: Utilities.validateEmail,
+
+      validator: (emailString){
+        return Utilities.validateEmail(emailString!);},
       onSaved: (value){
         setState(() {
-          email.text=value;
+          email.text=value!;
         });
       },
-
-       */
-
     );
   }
 
@@ -131,12 +129,11 @@ class _SignUpFormState extends State<SignUpForm> {
           floatingLabelBehavior: FloatingLabelBehavior.always,
           suffixIcon: Icon(Icons.lock_outline)
       ),
-    /*
+    
       validator: (passwordKey){
-        return Utilities.validatePassword(passwordKey);
+        return Utilities.validatePassword(passwordKey!);
       }
-
-     */
+      
     );
   }
   TextFormField conformTextFormField(){
@@ -150,23 +147,18 @@ class _SignUpFormState extends State<SignUpForm> {
           floatingLabelBehavior: FloatingLabelBehavior.always,
           suffixIcon: Icon(Icons.lock_outline)
       ),
-    /*
+    
       validator:(conformPassword){
         var pass =_passKey.currentState?.value;
-        return Utilities.conformPassword(conformPassword,pass);
+        return Utilities.conformPassword(conformPassword!,pass);
       },
       onSaved: (value){
         setState(() {
-          conform?.text =value;
+          conform.text =value!;
         });
       },
-
-     */
     );
   }
-
-
-
 }
 
 

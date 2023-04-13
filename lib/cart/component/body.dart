@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:foods_now/cart/components/check_out_cart.dart';
+import 'package:foods_now/cart/component/checkout_screen.dart';
 import 'package:foods_now/model/products.dart';
 import 'package:foods_now/model/carts.dart';
 
@@ -47,13 +47,14 @@ class _BodyState extends State<Body> {
 
                       },
                     ),
-                    const Divider()
+
+                    const Divider(),
                   ],
                 );
               },
             ),
           ),
-          CheckOutCart(sum:sum,)
+          CheckOutScreen(sum:sum,),
         ],
       ),
     );
@@ -63,6 +64,7 @@ class _BodyState extends State<Body> {
 class CartItem extends StatelessWidget{
 
   Products product;
+  bool _isLoading = false;
   CartItem({required this.product});
 
   @override
@@ -70,18 +72,26 @@ class CartItem extends StatelessWidget{
     return Container(
       color: const Color(0xFFF5F5F5),
       padding: const EdgeInsets.all(16),
-      child: Row(
+      child: Column(
         children: [
-          SizedBox(
-            width: 100,
-            height: 100,
-            child: Image.asset(product.image)
+          Row(
+            children: [
+              SizedBox(
+                  width: 100,
+                  height: 100,
+                  child: Image.asset(product.image)
+              ),
+              Expanded(child: Text(product.title)),
+              Expanded(child: Text(product.price.toString())),
+            ],
           ),
-          Expanded(child: Text(product.title)),
-          Expanded(child: Text(product.price.toString())),
-          const Icon(Icons.delete_outline)
         ],
       ),
     );
   }
 }
+
+
+
+
+
